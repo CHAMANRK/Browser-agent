@@ -129,6 +129,7 @@ class ChamanViewModel : ViewModel() {
         private set
     var status by mutableStateOf("Ready")
         private set
+    fun setStatus(message: String) { status = message }
     var settingsOpen by mutableStateOf(false)
     var groqConfigured by mutableStateOf(false)
     var nvidiaConfigured by mutableStateOf(false)
@@ -273,7 +274,7 @@ fun ChamanApp(vm: ChamanViewModel = viewModel()) {
                     val encoded = Base64.encodeToString(bytes, Base64.NO_WRAP)
                     image = ImageAttachment("data:$mime;base64,$encoded", "attached image")
                 }
-            } catch (_: Exception) { vm.status = "Could not read image" }
+            } catch (_: Exception) { vm.setStatus("Could not read image") }
         }
     }
     val listState = rememberLazyListState()
